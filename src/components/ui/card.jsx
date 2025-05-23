@@ -5,8 +5,8 @@ const Card = forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border border-border bg-card text-primary shadow-sm",
-      className
+      "border-border bg-background text-primary rounded-xl border shadow-sm",
+      className,
     )}
     {...props}
   />
@@ -26,8 +26,8 @@ const CardTitle = forwardRef(({ className, ...props }, ref) => (
   <h3
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
-      className
+      "text-2xl leading-none font-semibold tracking-tight",
+      className,
     )}
     {...props}
   />
@@ -35,11 +35,7 @@ const CardTitle = forwardRef(({ className, ...props }, ref) => (
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = forwardRef(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-secondary", className)}
-    {...props}
-  />
+  <p ref={ref} className={cn("text-secondary text-sm", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 
@@ -57,4 +53,11 @@ const CardFooter = forwardRef(({ className, ...props }, ref) => (
 ));
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+};

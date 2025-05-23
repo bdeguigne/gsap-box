@@ -29,7 +29,7 @@ export function MainLayout({ children }) {
   return (
     <div className="bg-background text-primary flex min-h-screen flex-col">
       <header className="border-border bg-menu/80 sticky top-0 z-50 w-full border-b backdrop-blur-sm">
-        <div className="container mx-auto px-2 sm:px-2 lg:px-3">
+        <div className="container mx-auto max-w-6xl px-2 sm:px-2 lg:px-3">
           <div className="flex h-12 items-center justify-between">
             <div className="flex items-center">
               <a
@@ -84,7 +84,7 @@ export function MainLayout({ children }) {
       <main className="flex-1">{children}</main>
 
       <footer className="border-border bg-background border-t py-6">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center space-y-2">
             <p className="text-secondary text-sm">
               GSAP-Box - A library of reusable GSAP components for React

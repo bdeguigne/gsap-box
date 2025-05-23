@@ -7,7 +7,12 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
-export function TextReveal({ children, animateOnScroll = true, delay = 0 }) {
+export function TextReveal({
+  children,
+  animateOnScroll = true,
+  delay = 0,
+  repeat = false,
+}) {
   const containerRef = useRef(null);
   const elementRef = useRef([]);
   const splitRef = useRef([]);
@@ -73,7 +78,15 @@ export function TextReveal({ children, animateOnScroll = true, delay = 0 }) {
           },
         });
       } else {
-        gsap.to(lines.current, animationProps);
+        if (repeat) {
+          const tl = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 1,
+          });
+          tl.to(lines.current, animationProps);
+        } else {
+          gsap.to(lines.current, animationProps);
+        }
       }
 
       return () => {
@@ -86,7 +99,7 @@ export function TextReveal({ children, animateOnScroll = true, delay = 0 }) {
     },
     {
       scope: containerRef,
-      dependencies: [animateOnScroll, delay],
+      dependencies: [animateOnScroll, delay, repeat],
     },
   );
 

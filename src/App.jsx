@@ -58,8 +58,8 @@ function App() {
   return (
     <MainLayout>
       {/* Hero Section */}
-      <section className="relative px-4 py-20 sm:px-6 lg:px-8">
-        <div className="container mx-auto max-w-5xl space-y-6">
+      <section className="relative border-b border-dashed border-gray-800 px-4 py-20 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-6xl space-y-6">
           <TextReveal>
             <h1 className="tracking text-4xl font-semibold md:text-5xl">
               Reusable GSAP Animations For React Developers
@@ -80,16 +80,19 @@ function App() {
         </div>
       </section>
 
-      {/* Components Grid */}
+      {/* Text Animations Section */}
       <section
-        id="components"
+        id="text-animations"
         className="bg-[#0d0d10] px-4 py-16 sm:px-6 lg:px-8"
       >
         <div className="container mx-auto max-w-6xl">
           <FadeInScroll>
-            <h2 className="mb-6 text-3xl font-normal tracking-tight">
-              Featured Components
+            <h2 className="mb-1 text-2xl font-medium tracking-tight">
+              Text Animations
             </h2>
+            <p className="text-secondary mb-6 text-sm">
+              Beautiful, simple, and reusable GSAP animations.
+            </p>
           </FadeInScroll>
 
           <StaggeredGrid className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -97,8 +100,11 @@ function App() {
               title="Text Reveal"
               description="Animate text with a character-by-character reveal effect"
               preview={
-                <TextReveal>
-                  <p>Hello World</p>
+                <TextReveal animateOnScroll={false} repeat={true}>
+                  <p className="text-xl">This is a text reveal animation</p>
+                  <p className="text-secondary">
+                    It will animate character by character
+                  </p>
                 </TextReveal>
               }
             />
@@ -120,7 +126,26 @@ function App() {
                 </div>
               }
             />
+          </StaggeredGrid>
+        </div>
+      </section>
 
+      {/* Page Transition Section */}
+      <section
+        id="page-transitions"
+        className="bg-[#0d0d10] px-4 py-16 sm:px-6 lg:px-8"
+      >
+        <div className="container mx-auto max-w-6xl">
+          <FadeInScroll>
+            <h2 className="mb-1 text-2xl font-medium tracking-tight">
+              Page Transitions
+            </h2>
+            <p className="text-secondary mb-6 text-sm">
+              Smooth transitions between pages.
+            </p>
+          </FadeInScroll>
+
+          <StaggeredGrid className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ComponentCard
               title="Page Transition"
               description="Smooth transitions between pages or sections"
