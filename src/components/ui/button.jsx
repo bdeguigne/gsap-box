@@ -10,10 +10,11 @@ const buttonVariants = cva(
       variant: {
         default: "bg-accent text-accent-foreground hover:bg-accent/90",
         destructive: "bg-red-500 text-white hover:bg-red-500/90",
-        outline: "border border-border bg-transparent hover:bg-muted hover:text-primary",
+        outline:
+          "border border-border bg-transparent hover:bg-muted hover:text-primary",
         secondary: "bg-muted text-secondary-foreground hover:bg-muted/80",
         ghost: "hover:bg-muted hover:text-primary",
-        link: "underline-offset-4 hover:underline text-primary",
+        link: "underline-offset-4 hover:underline text-secondary",
       },
       size: {
         default: "h-10 py-2 px-4",
@@ -26,7 +27,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 const Button = forwardRef(
@@ -34,12 +35,15 @@ const Button = forwardRef(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          "cursor-pointer",
+        )}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

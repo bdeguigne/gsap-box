@@ -1,13 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
 import { ReactLenis } from "lenis/react";
+import { FontLoader } from "./components/FontLoader";
+import App from "./App";
+import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ReactLenis root>
-      <App />
-    </ReactLenis>
-  </StrictMode>
+    <FontLoader>
+      <BrowserRouter>
+        <ReactLenis root>
+          <App />
+        </ReactLenis>
+      </BrowserRouter>
+    </FontLoader>
+  </StrictMode>,
 );

@@ -1,7 +1,6 @@
-import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -9,11 +8,11 @@ import {
   NavigationMenuLink,
 } from "../components/ui/navigation-menu";
 import { cn } from "../lib/utils";
+import { useNavigate } from "react-router-dom";
 
-// Register the ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+export function RootLayout() {
+  const navigate = useNavigate();
 
-export function MainLayout({ children }) {
   // Navigation animation
   useGSAP(() => {
     gsap.from(".nav-item", {
@@ -33,10 +32,10 @@ export function MainLayout({ children }) {
           <div className="flex h-12 items-center justify-between">
             <div className="flex items-center">
               <a
-                href="/"
-                className="nav-item flex items-center text-sm font-light tracking-tight italic"
+                onClick={() => navigate("/")}
+                className="nav-item flex cursor-pointer items-center text-sm font-light tracking-tight italic"
               >
-                <img src="logo.png" alt="" className="h-10 w-10" />
+                <img src="/logo.png" alt="" className="h-10 w-10" />
                 <span>GSAP-BOX</span>
               </a>
             </div>
@@ -81,7 +80,10 @@ export function MainLayout({ children }) {
         </div>
       </header>
 
-      <main className="flex-1">{children}</main>
+      {/* Outlet pour le contenu des routes */}
+      <main className="flex-1">
+        <Outlet />
+      </main>
 
       <footer className="border-border bg-background border-t py-6">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
