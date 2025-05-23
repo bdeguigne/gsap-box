@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { ComponentCard } from "../components/ComponentCard";
 import { TextReveal } from "../components/gsap-components/TextReveal";
 import { FadeInScroll } from "../components/gsap-components/fade-in-scroll";
-import { ParallaxScroll } from "../components/gsap-components/parallax-scroll";
 import { StaggeredGrid } from "../components/gsap-components/staggered-grid";
 import { RollingText } from "../components/gsap-components/RollingText";
 import { Button } from "../components/ui/button";
@@ -31,11 +30,11 @@ export default function Home() {
   // Fonction pour naviguer vers la page de détail du composant
   // On passe uniquement des données sérialisables (pas de composants React)
   const navigateToComponent = (id, componentName, code) => {
-    navigate(`/component/${id}`, { 
+    navigate(`/component/${id}`, {
       state: {
         title: componentName,
-        code: code
-      }
+        code: code,
+      },
     });
   };
 
@@ -75,7 +74,7 @@ export default function Home() {
               Text Animations
             </h2>
             <p className="text-secondary mb-6 text-sm">
-              Beautiful, simple, and reusable GSAP animations.
+              Nice, simple, and reusable GSAP animations.
             </p>
           </FadeInScroll>
 
@@ -83,30 +82,86 @@ export default function Home() {
             <ComponentCard
               title="Text Reveal"
               preview={
-                <TextReveal animateOnScroll={false} repeat={true}>
-                  <p className="text-md">This is a text reveal animation</p>
+                <TextReveal
+                  animateOnScroll={false}
+                  repeat={true}
+                  splitType="letters"
+                >
+                  <h3 className="mb-4 text-2xl font-bold">
+                    Text Reveal Animation
+                  </h3>
+                  <p className="text-sm">
+                    This is a text reveal animation using GSAP and SplitText
+                  </p>
                   <p className="text-secondary text-sm">
                     It will animate character by character
                   </p>
                 </TextReveal>
               }
-              onClick={() => navigateToComponent("text-reveal", "Text Reveal", textRevealCode)}
+              onClick={() =>
+                navigateToComponent(
+                  "text-reveal",
+                  "Text Reveal",
+                  textRevealCode,
+                )
+              }
             />
-            
+
             <ComponentCard
               title="Rolling Text"
               preview={
-                <div className="h-4">
-                  <RollingText words={["ROLLING", "TEXT", "ANIMATION"]} />
+                <div className="flex items-center justify-center">
+                  <div className="text-xl font-[200] whitespace-nowrap">
+                    Motion creates{" "}
+                    <span className="inline-block">
+                      <RollingText
+                        innerClass="text-xl font-bold text-accent inline-block"
+                        words={["impact.", "wonder.", "rhythm.", "appeal."]}
+                        letterHeight={15}
+                      />
+                    </span>
+                  </div>
                 </div>
               }
-              onClick={() => navigateToComponent("rolling-text", "Rolling Text", rollingTextCode)}
+              onClick={() =>
+                navigateToComponent(
+                  "rolling-text",
+                  "Rolling Text",
+                  rollingTextCode,
+                )
+              }
             />
 
             <ComponentCard
               title="Fade In Scroll"
-              preview={<div className="text-xl">Fade In Content</div>}
-              onClick={() => navigateToComponent("fade-in-scroll", "Fade In Scroll", fadeInScrollCode)}
+              preview={
+                <div className="flex h-[100px] items-center justify-center">
+                  <div className="bg-accent rounded-md px-4 py-2 text-sm font-medium text-white">
+                    Fade In On Scroll
+                  </div>
+                </div>
+              }
+              onClick={() =>
+                navigateToComponent(
+                  "fade-in-scroll",
+                  "Fade In Scroll",
+                  fadeInScrollCode,
+                )
+              }
+            />
+
+            <ComponentCard
+              title="Page Transition"
+              preview={
+                <div className="flex h-[100px] items-center justify-center">
+                  <div className="bg-accent rounded-md px-4 py-2 text-sm font-medium text-white">
+                    Bottom-to-Top Transition
+                  </div>
+                </div>
+              }
+              onClick={() =>
+                navigateToComponent("page-transition", "Page Transition")
+              }
             />
           </StaggeredGrid>
         </div>

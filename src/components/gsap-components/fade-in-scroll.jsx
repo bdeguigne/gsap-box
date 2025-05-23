@@ -14,7 +14,6 @@ export function FadeInScroll({
   duration = 0.8,
   delay = 0,
   ease = "power3.out",
-  threshold = 0.2,
   className,
   ...props
 }) {
@@ -37,19 +36,16 @@ export function FadeInScroll({
         ease: ease,
         scrollTrigger: {
           trigger: elementRef.current,
-          start: `top bottom-=${threshold * 100}%`,
-          toggleActions: "play none none none",
+          start: "top 90%",
+          end: "bottom 70%",
+          once: true,
         },
-      }
+      },
     );
   }, []);
 
   return (
-    <div
-      ref={elementRef}
-      className={cn("opacity-0", className)}
-      {...props}
-    >
+    <div ref={elementRef} className={cn("opacity-0", className)} {...props}>
       {children}
     </div>
   );

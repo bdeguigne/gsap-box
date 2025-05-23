@@ -6,6 +6,7 @@ import { CodeBlock } from "../components/ui/code-block";
 import { TextReveal } from "../components/gsap-components/TextReveal";
 import { FadeInScroll } from "../components/gsap-components/fade-in-scroll";
 import { RollingText } from "../components/gsap-components/RollingText";
+import PageTransitionDemo from "../components/gsap-components/PageTransition";
 
 /**
  * Page de détail d'un composant GSAP
@@ -17,27 +18,110 @@ export default function ComponentPreview() {
   const location = useLocation();
   const componentData = location.state || {};
   const [activeTab, setActiveTab] = useState("preview");
+  const [splitType, setSplitType] = useState("lines"); // État pour le type de split
+  const [rollingTextDemo, setRollingTextDemo] = useState("counter"); // État pour le type de démo RollingText
 
   // Fonction pour générer l'aperçu du composant en fonction de son ID
   const getComponentPreview = () => {
     switch (componentId) {
       case "text-reveal":
         return (
-          <TextReveal animateOnScroll={false} repeat={true}>
-            <p className="text-md">This is a text reveal animation</p>
-            <p className="text-secondary text-sm">
-              It will animate character by character
-            </p>
-          </TextReveal>
+          <div className="w-full max-w-xl">
+            <TextReveal
+              animateOnScroll={false}
+              repeat={true}
+              splitType={splitType}
+            >
+              <h3 className="mb-4 text-2xl font-bold">Text Reveal Animation</h3>
+              <p className="mb-2">
+                This component creates beautiful text reveal animations using
+                GSAP and SplitText.
+              </p>
+              <p className="mb-2">
+                You can animate by lines, words, or individual letters for
+                different effects.
+              </p>
+              <p className="text-secondary mb-4 text-sm">
+                Perfect for headlines, paragraphs, and any text that needs
+                attention.
+              </p>
+            </TextReveal>
+
+            {/* Boutons de sélection du mode */}
+            <div className="mt-8 flex justify-center gap-2">
+              {["lines", "words", "letters"].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setSplitType(type)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    splitType === type
+                      ? "bg-accent text-accent-foreground"
+                      : "bg-muted text-secondary hover:text-primary"
+                  }`}
+                >
+                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
         );
       case "rolling-text":
         return (
-          <div className="h-4">
-            <RollingText words={["ROLLING", "TEXT", "ANIMATION"]} />
+          <div className="flex flex-col items-center">
+            {/* Affichage de la démo sélectionnée */}
+            <div className="flex min-h-[150px] w-full items-center justify-center">
+              {rollingTextDemo === "counter" ? (
+                <div className="flex items-center justify-center">
+                  <span className="font-mono text-5xl font-bold text-green-400">
+                    202
+                  </span>
+                  <RollingText
+                    innerClass="text-5xl font-mono font-bold text-green-400"
+                    words={["3", "4", "5", "6"]}
+                    letterHeight={40}
+                  />
+                </div>
+              ) : (
+                <div className="flex items-center justify-center">
+                  <div className="text-3xl font-[200] whitespace-nowrap">
+                    Motion creates{" "}
+                    <span className="inline-block">
+                      <RollingText
+                        innerClass="text-3xl font-bold text-accent inline-block"
+                        words={["impact.", "wonder.", "rhythm.", "appeal."]}
+                        letterHeight={25}
+                      />
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Boutons de sélection du mode */}
+            <div className="mt-8 flex justify-center gap-2">
+              {[
+                { id: "counter", label: "Year Counter" },
+                { id: "headline", label: "Headline" },
+              ].map((demo) => (
+                <button
+                  key={demo.id}
+                  onClick={() => setRollingTextDemo(demo.id)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    rollingTextDemo === demo.id
+                      ? "bg-accent text-accent-foreground"
+                      : "bg-muted text-secondary hover:text-primary"
+                  }`}
+                >
+                  {demo.label}
+                </button>
+              ))}
+            </div>
           </div>
         );
       case "fade-in-scroll":
         return <div className="text-xl">Fade In Content</div>;
+      case "page-transition":
+        return <PageTransitionDemo />;
       default:
         return <div className="text-secondary">Aperçu non disponible</div>;
     }
