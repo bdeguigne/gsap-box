@@ -10,21 +10,19 @@ import BottomToTopTransitionDemo from "../demo/BottomToTopTransitionDemo";
 import SplitTransitionDemo from "../demo/SplitTransitionDemo";
 import { SplitPageTransition } from "../components/gsap-components/SplitPageTransition";
 
-/**
- * Page de détail d'un composant GSAP
- * Affiche un aperçu et le code du composant avec un système d'onglets
- */
+import { sourceCode } from "../data/source-code";
+
 export default function ComponentPreview() {
   const { componentId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const componentData = location.state || {};
   const [activeTab, setActiveTab] = useState("preview");
-  const [codeTab, setCodeTab] = useState("demo"); // État pour le type de code à afficher (demo ou component)
-  const [splitType, setSplitType] = useState("lines"); // État pour le type de split
-  const [rollingTextDemo, setRollingTextDemo] = useState("counter"); // État pour le type de démo RollingText
-  const [demoCode, setDemoCode] = useState(""); // État pour stocker le code de la démo
-  const [componentCode, setComponentCode] = useState(""); // État pour stocker le code du composant
+  const [codeTab, setCodeTab] = useState("demo");
+  const [splitType, setSplitType] = useState("lines");
+  const [rollingTextDemo, setRollingTextDemo] = useState("counter");
+  const [demoCode, setDemoCode] = useState("");
+  const [componentCode, setComponentCode] = useState("");
 
   // Fonction pour générer l'aperçu du composant en fonction de son ID
   const getComponentPreview = () => {
@@ -124,7 +122,30 @@ export default function ComponentPreview() {
           </div>
         );
       case "fade-in-scroll":
-        return <div className="text-xl">Fade In Content</div>;
+        return (
+          <div className="w-full max-w-xl">
+            <FadeInScroll>
+              <div className="mb-4 rounded-lg bg-card p-6 shadow-md">
+                <h3 className="mb-2 text-xl font-bold">Reveal on Scroll</h3>
+                <p className="text-secondary">Elements gracefully appear as you scroll down the page.</p>
+              </div>
+            </FadeInScroll>
+            
+            <FadeInScroll delay={0.2}>
+              <div className="mb-4 rounded-lg bg-card p-6 shadow-md">
+                <h3 className="mb-2 text-xl font-bold">Sequential Animation</h3>
+                <p className="text-secondary">Content appears in sequence with customizable timing.</p>
+              </div>
+            </FadeInScroll>
+            
+            <FadeInScroll delay={0.4}>
+              <div className="mb-4 rounded-lg bg-card p-6 shadow-md">
+                <h3 className="mb-2 text-xl font-bold">Subtle Motion</h3>
+                <p className="text-secondary">Elegant animations that enhance rather than distract from your content.</p>
+              </div>
+            </FadeInScroll>
+          </div>
+        );
       case "bottom-to-top-transition":
         return (
           <div className="h-full w-full">
@@ -142,70 +163,38 @@ export default function ComponentPreview() {
     }
   };
 
-  // Fonction pour charger le code source des composants et démos
+  // Charger le code source des composants et démos depuis le fichier de données
   useEffect(() => {
-    const loadComponentCode = async () => {
+    const loadComponentCode = () => {
       try {
-        // Déterminer les chemins de fichiers en fonction du composant sélectionné
-        let demoPath = "";
-        let componentPath = "";
-
-        switch (componentId) {
-          case "text-reveal":
-            demoPath = "src/demo/TextRevealDemo.jsx";
-            componentPath = "src/components/gsap-components/TextReveal.jsx";
-            break;
-          case "rolling-text":
-            demoPath = "src/demo/RollingTextDemo.jsx";
-            componentPath = "src/components/gsap-components/RollingText.jsx";
-            break;
-          case "fade-in-scroll":
-            demoPath = "src/demo/FadeInScrollDemo.jsx";
-            componentPath = "src/components/gsap-components/FadeInScroll.jsx";
-            break;
-          case "bottom-to-top-transition":
-            demoPath = "src/demo/BottomToTopTransitionDemo.jsx";
-            componentPath =
-              "src/components/gsap-components/BottomToTopTransition.jsx";
-            break;
-          case "split-page-transition":
-            demoPath = "src/demo/SplitTransitionDemo.jsx";
-            componentPath =
-              "src/components/gsap-components/SplitPageTransition.jsx";
-            break;
-          default:
-            break;
-        }
-
-        const readSourceFile = async (filePath) => {
-          try {
-            const response = await fetch(
-              `/src-viewer?file=${encodeURIComponent(filePath)}`,
-            );
-            if (response.ok) {
-              return await response.text();
-            }
-            return `// Le fichier source n'a pas pu être chargé: ${filePath}`;
-          } catch (error) {
-            console.error(
-              `Erreur lors de la lecture du fichier source: ${error}`,
-            );
-            return `// Erreur lors de la lecture du fichier source: ${error}`;
+        // Vérifier si le composant existe dans notre base de données de code source
+        if (sourceCode[componentId]) {
+          // Récupérer le code de la démo
+          if (sourceCode[componentId].demo) {
+            setDemoCode(sourceCode[componentId].demo);
+          } else {
+            setDemoCode(`// Code de démo non disponible pour ${componentId}`);
           }
-        };
 
-        // Lire directement le contenu des fichiers source
-        if (demoPath) {
-          const demoContent = await readSourceFile(demoPath);
-          setDemoCode(demoContent);
-        }
-
-        if (componentPath) {
-          const componentContent = await readSourceFile(componentPath);
-          setComponentCode(componentContent);
+          // Récupérer le code du composant
+          if (sourceCode[componentId].component) {
+            setComponentCode(sourceCode[componentId].component);
+          } else {
+            setComponentCode(
+              `// Code du composant non disponible pour ${componentId}`,
+            );
+          }
+        } else {
+          // Composant non trouvé dans la base de données
+          setDemoCode(`// Code de démo non disponible pour ${componentId}`);
+          setComponentCode(
+            `// Code du composant non disponible pour ${componentId}`,
+          );
         }
       } catch (error) {
         console.error("Erreur lors du chargement du code source:", error);
+        setDemoCode(`// Erreur: ${error.message}`);
+        setComponentCode(`// Erreur: ${error.message}`);
       }
     };
 
@@ -276,7 +265,7 @@ export default function ComponentPreview() {
                 }`}
                 onClick={() => setCodeTab("demo")}
               >
-                Code de la démo
+                Demo code
               </button>
               <button
                 className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
@@ -286,7 +275,7 @@ export default function ComponentPreview() {
                 }`}
                 onClick={() => setCodeTab("component")}
               >
-                Code du composant
+                Component code
               </button>
             </div>
 
@@ -296,26 +285,26 @@ export default function ComponentPreview() {
                 <CodeBlock
                   code={demoCode}
                   language="jsx"
-                  title="Code de la démo"
+                  title="Demo Code"
                   filename={
                     componentId ? `${componentId}-demo.jsx` : "demo.jsx"
                   }
                 />
               ) : (
                 <div className="text-secondary bg-muted rounded-md p-4">
-                  Code de la démo non disponible pour ce composant
+                  Demo code not available for this component
                 </div>
               )
             ) : componentCode ? (
               <CodeBlock
                 code={componentCode}
                 language="jsx"
-                title="Code du composant"
+                title="Component Code"
                 filename={componentId ? `${componentId}.jsx` : "component.jsx"}
               />
             ) : (
               <div className="text-secondary bg-muted rounded-md p-4">
-                Code du composant non disponible
+                Component code not available
               </div>
             )}
           </div>

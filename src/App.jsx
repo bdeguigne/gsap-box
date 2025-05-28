@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Components from "./pages/Components";
 import ComponentPreview from "./pages/ComponentPreview";
 import { RootLayout } from "./layouts/RootLayout";
 
@@ -8,6 +9,7 @@ function App() {
     <Routes>
       <Route element={<RootLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/components" element={<Components />} />
         <Route path="/component/:componentId" element={<ComponentPreview />} />
       </Route>
     </Routes>

@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { ComponentCard } from "../components/ComponentCard";
 import { TextReveal } from "../components/gsap-components/TextReveal";
 import { FadeInScroll } from "../components/gsap-components/FadeInScroll";
-import { StaggeredGrid } from "../components/ui/staggered-grid";
 import { RollingText } from "../components/gsap-components/RollingText";
-import BottomToTopTransitionAutoDemo from "../demo/BottomToTopTransitionAutoDemo";
-import SplitTransitionAutoDemo from "../demo/SplitTransitionAutoDemo";
 import { Button } from "../components/ui/button";
+import { ArrowRight, Github, Code, Wand2, Zap } from "lucide-react";
 
 // Exemples de code pour les composants
 const textRevealCode = `import { TextReveal } from "./components/gsap-components/TextReveal";
@@ -29,238 +26,152 @@ const rollingTextCode = `import { RollingText } from "./components/gsap-componen
 export default function Home() {
   const navigate = useNavigate();
 
-  // Fonction pour naviguer vers la page de détail du composant
-  // On passe uniquement des données sérialisables (pas de composants React)
-  const navigateToComponent = (id, componentName, code) => {
-    navigate(`/component/${id}`, {
-      state: {
-        title: componentName,
-        code: code,
-      },
-    });
-  };
-
   return (
-    <>
+    <div className="bg-background">
       {/* Hero Section */}
-      <section className="relative border-b border-dashed border-gray-800 px-4 py-20 sm:px-6 lg:px-8">
-        <div className="container mx-auto max-w-6xl space-y-6">
-          <TextReveal>
-            <h1 className="tracking text-4xl font-semibold md:text-5xl">
-              Reusable GSAP Animations For React Developers
-            </h1>
+      <section className="relative flex min-h-[80vh] items-center border-b border-gray-800/20 px-4 lg:min-h-[60vh] xl:min-h-[70vh]">
+        <div className="container mx-auto flex max-w-6xl flex-col items-center gap-10 py-12 md:flex-row md:justify-between md:py-0">
+          <div className="max-w-xl">
+            <TextReveal>
+              <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">
+                GSAP Animations <br />
+                <span className="text-accent">for React Developers</span>
+              </h1>
 
-            <p className="text-secondary mt-4 max-w-2xl text-xl font-light">
-              A curated collection of beautiful and reusable GSAP animations.
-              Plug & Play for any React project.
-            </p>
-          </TextReveal>
+              <p className="text-secondary mb-8 text-lg">
+                A collection of reusable GSAP animation components for React.
+                Copy, paste, and customize for your projects.
+              </p>
+            </TextReveal>
 
-          <FadeInScroll>
             <div className="flex gap-4">
-              <Button variant="default">Browse Components</Button>
-              <Button variant="outline">Github</Button>
+              <Button
+                size="lg"
+                className="gap-2"
+                onClick={() => navigate("/components")}
+              >
+                Explore Components
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2">
+                <Github className="h-4 w-4" />
+                GitHub
+              </Button>
             </div>
-          </FadeInScroll>
-        </div>
-      </section>
+          </div>
 
-      {/* Text Animations Section */}
-      <section
-        id="components"
-        className="bg-[#0d0d10] px-4 py-16 sm:px-6 lg:px-8"
-      >
-        <div className="container mx-auto max-w-6xl">
-          <FadeInScroll>
-            <h2 className="mb-1 text-2xl font-medium tracking-tight">
-              Text Animations
-            </h2>
-            <p className="text-secondary mb-6 text-sm">
-              Nice, simple, and reusable text animations.
-            </p>
-          </FadeInScroll>
-
-          <StaggeredGrid className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <ComponentCard
-              title="Text Reveal"
-              preview={
-                <TextReveal
-                  animateOnScroll={false}
-                  repeat={true}
-                  splitType="letters"
-                >
-                  <h3 className="mb-4 text-2xl font-bold">
-                    Text Reveal Animation
-                  </h3>
-                  <p className="text-sm">
-                    This is a text reveal animation using GSAP and SplitText
-                  </p>
-                  <p className="text-secondary text-sm">
-                    It will animate character by character
-                  </p>
-                </TextReveal>
-              }
-              onClick={() =>
-                navigateToComponent(
-                  "text-reveal",
-                  "Text Reveal",
-                  textRevealCode,
-                )
-              }
-            />
-
-            <ComponentCard
-              title="Rolling Text"
-              preview={
-                <div className="flex items-center justify-center">
-                  <div className="text-xl font-[200] whitespace-nowrap">
-                    Motion creates{" "}
-                    <span className="inline-block">
-                      <RollingText
-                        innerClass="text-xl font-bold text-accent inline-block"
-                        words={["impact.", "wonder.", "rhythm.", "appeal."]}
-                        letterHeight={15}
-                      />
-                    </span>
-                  </div>
+          <div className="border-border relative h-[300px] w-full max-w-md rounded-lg border bg-black/10 shadow-lg backdrop-blur-sm md:h-[350px]">
+            <div className="absolute inset-0 flex items-center justify-center p-6">
+              <div className="text-center md:text-left">
+                <h3 className="mb-4 text-xl font-medium">Animation brings</h3>
+                <div className="text-2xl font-[200] whitespace-nowrap">
+                  <span className="inline-block">
+                    <RollingText
+                      innerClass="text-3xl font-bold text-accent inline-block"
+                      words={["life.", "motion.", "energy.", "magic."]}
+                      letterHeight={25}
+                    />
+                  </span>
                 </div>
-              }
-              onClick={() =>
-                navigateToComponent(
-                  "rolling-text",
-                  "Rolling Text",
-                  rollingTextCode,
-                )
-              }
-            />
-
-            <ComponentCard
-              title="Fade In Scroll"
-              preview={
-                <div className="flex h-[100px] items-center justify-center">
-                  <div className="bg-accent rounded-md px-4 py-2 text-sm font-medium text-white">
-                    Fade In On Scroll
-                  </div>
-                </div>
-              }
-              onClick={() =>
-                navigateToComponent(
-                  "fade-in-scroll",
-                  "Fade In Scroll",
-                  fadeInScrollCode,
-                )
-              }
-            />
-          </StaggeredGrid>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section
-        id="page-transition"
-        className="bg-[#0d0d10] px-4 py-16 sm:px-6 lg:px-8"
-      >
+      {/* Features Section */}
+      <section className="px-4 py-16">
         <div className="container mx-auto max-w-6xl">
-          <FadeInScroll>
-            <h2 className="mb-1 text-2xl font-medium tracking-tight">
-              Page Transitions
-            </h2>
-            <p className="text-secondary mb-6 text-sm">
-              Smooth page transitions.
-            </p>
-          </FadeInScroll>
-          <StaggeredGrid className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <ComponentCard
-              title="Bottom-to-Top Transition"
-              preview={<BottomToTopTransitionAutoDemo />}
-              onClick={() =>
-                navigateToComponent(
-                  "bottom-to-top-transition",
-                  "Bottom-to-Top Transition",
-                )
-              }
-            />
-            <ComponentCard
-              title="Split Page Transition"
-              preview={<SplitTransitionAutoDemo />}
-              onClick={() =>
-                navigateToComponent(
-                  "split-page-transition",
-                  "Split Page Transition",
-                )
-              }
-            />
-          </StaggeredGrid>
-        </div>
-      </section>
-      {/* How It Works Section */}
-      <section id="how-it-works" className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="container mx-auto max-w-4xl">
           <FadeInScroll>
             <h2 className="mb-12 text-center text-3xl font-bold">
-              How It Works
+              Simple, Powerful, Ready to Use
             </h2>
           </FadeInScroll>
 
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <FadeInScroll>
-              <div className="bg-card border-border rounded-lg border p-6">
-                <h3 className="mb-4 text-xl font-semibold">
-                  <span
-                    role="img"
-                    aria-label="Choose a Component"
-                    className="mr-2 inline-block align-middle"
-                  >
-                    🧩
-                  </span>
-                  Choose a Component
-                </h3>
+              <div className="text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+                  <Code className="text-accent h-8 w-8" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold">Ready to Use</h3>
                 <p className="text-secondary">
-                  Browse the library of GSAP components and select the one that
-                  fits your needs.
+                  Pre-built components that you can copy and paste directly into
+                  your React projects.
                 </p>
               </div>
             </FadeInScroll>
 
-            <FadeInScroll>
-              <div className="bg-card border-border rounded-lg border p-6">
-                <h3 className="mb-4 text-xl font-semibold">
-                  <span
-                    role="img"
-                    aria-label="Copy the Code"
-                    className="mr-2 inline-block align-middle"
-                  >
-                    📋
-                  </span>
-                  Copy the Code
-                </h3>
+            <FadeInScroll delay={0.2}>
+              <div className="text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+                  <Wand2 className="text-accent h-8 w-8" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold">Customizable</h3>
                 <p className="text-secondary">
-                  View and copy the component code directly into your React
-                  project.
+                  Easily customize animations with props to match your design
+                  requirements.
                 </p>
               </div>
             </FadeInScroll>
 
-            <FadeInScroll>
-              <div className="bg-card border-border rounded-lg border p-6">
-                <h3 className="mb-4 text-xl font-semibold">
-                  <span
-                    role="img"
-                    aria-label="Customize"
-                    className="mr-2 inline-block align-middle"
-                  >
-                    🎨
-                  </span>
-                  Customize
-                </h3>
+            <FadeInScroll delay={0.4}>
+              <div className="text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+                  <Zap className="text-accent h-8 w-8" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold">Optimized</h3>
                 <p className="text-secondary">
-                  Adjust the parameters to customize the animation to your
-                  specific needs.
+                  Performance-optimized animations that run smoothly on all
+                  devices.
                 </p>
               </div>
             </FadeInScroll>
           </div>
         </div>
       </section>
-    </>
+
+      {/* CTA Section */}
+      <section className="border-y border-gray-800/10 bg-black/10 px-4 py-16">
+        <div className="container mx-auto max-w-3xl text-center">
+          <FadeInScroll>
+            <h2 className="mb-6 text-2xl font-bold md:text-3xl">
+              Ready to add animations to your project?
+            </h2>
+            <p className="text-secondary mx-auto mb-8 max-w-2xl text-base md:text-lg">
+              Browse our collection of GSAP animation components and start
+              implementing them in your React project today.
+            </p>
+            <Button
+              size="lg"
+              className="gap-2"
+              onClick={() => navigate("/components")}
+            >
+              View All Components
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </FadeInScroll>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-4 py-8">
+        <div className="container mx-auto max-w-5xl">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-secondary text-sm">
+              © 2025 GSAP-Box. All rights reserved.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="text-secondary hover:text-accent text-sm">
+                GitHub
+              </a>
+              <a href="#" className="text-secondary hover:text-accent text-sm">
+                Twitter
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
