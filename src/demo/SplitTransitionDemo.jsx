@@ -10,15 +10,20 @@ export function SplitTransitionDemo() {
   const [transitionState, setTransitionState] = useState("inactive");
   const [direction, setDirection] = useState("vertical");
   const timeoutRef = useRef(null);
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
 
   // Overlay customization options - recalculated when direction changes
-  const overlayOptions = React.useMemo(() => ({
-    color: "#121212",
-    showDivider: true,
-    dividerColor: "white",
-    stagger: direction === "vertical" ? 0.1 : 0,
-    duration: 1
-  }), [direction]);
+  const overlayOptions = React.useMemo(
+    () => ({
+      color: "#121212",
+      showDivider: true,
+      dividerColor: "white",
+      stagger: direction === "vertical" ? 0.1 : 0,
+      duration: 1,
+    }),
+    [direction],
+  );
 
   // Handle transition completion and schedule next animation
   const handleTransitionComplete = (type) => {
@@ -31,28 +36,27 @@ export function SplitTransitionDemo() {
       }, 1500);
     }
   };
-  
-  // Handle direction change with proper cleanup
+
   const handleDirectionChange = (newDirection) => {
     if (direction === newDirection) return;
-    
+
     // Clear any pending transitions
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    
+
     // Kill all GSAP animations globally
     gsap.killTweensOf("*");
-    
+
     // Reset element states if they exist
     if (leftRef.current && rightRef.current) {
       // Reset visibility
       gsap.set([leftRef.current, rightRef.current], {
         autoAlpha: 1,
-        clearProps: "all"
+        clearProps: "all",
       });
-      
+
       // Reset masks
       if (leftRef.current.mask && rightRef.current.mask) {
         gsap.set([leftRef.current.mask, rightRef.current.mask], {
@@ -61,24 +65,21 @@ export function SplitTransitionDemo() {
           x: 0,
           y: 0,
           autoAlpha: 1,
-          clearProps: "transform,opacity,visibility"
+          clearProps: "transform,opacity,visibility",
         });
       }
     }
-    
+
     // Update direction and reset state
     setDirection(newDirection);
     setTransitionState("inactive");
-    
+
     // Start new transition after a short delay
     setTimeout(() => {
       setTransitionState("entering");
     }, 100);
   };
 
-  // We don't need this effect anymore as handleDirectionChange handles everything
-
-  // Start animation on mount
   useEffect(() => {
     setTransitionState("entering");
 
@@ -89,11 +90,7 @@ export function SplitTransitionDemo() {
     };
   }, []);
 
-  // References for text animation
-  const leftRef = useRef(null);
-  const rightRef = useRef(null);
-
-  // Text reveal animation with masks
+  // Custom Text reveal animation with masks for the overlay
   useGSAP(
     () => {
       if (
@@ -104,10 +101,15 @@ export function SplitTransitionDemo() {
       ) {
         // Reset any ongoing animations when state changes
         if (transitionState === "inactive") {
-          gsap.killTweensOf([leftRef.current, rightRef.current, leftRef.current.mask, rightRef.current.mask]);
+          gsap.killTweensOf([
+            leftRef.current,
+            rightRef.current,
+            leftRef.current.mask,
+            rightRef.current.mask,
+          ]);
           return;
         }
-        
+
         if (transitionState === "entering") {
           const tl = gsap.timeline({ delay: 0.8 });
 
@@ -312,7 +314,7 @@ export function SplitTransitionDemo() {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="relative h-[150px] w-full overflow-hidden rounded-lg border">
+      <div className="border-border relative h-[300px] w-full overflow-hidden rounded-lg border">
         <SplitPageTransition
           frontPage={overlayContent}
           backPage={content}

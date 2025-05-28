@@ -45,7 +45,7 @@ export function RootLayout() {
                   <NavigationMenuLink
                     href="#components"
                     className={cn(
-                      "hover:text-primary text-sm font-medium transition-colors",
+                      "hover:text-primary text-primary/80 text-sm font-medium transition-colors",
                       "block px-4 py-2",
                     )}
                   >
@@ -56,22 +56,11 @@ export function RootLayout() {
                   <NavigationMenuLink
                     href="#how-it-works"
                     className={cn(
-                      "hover:text-primary text-sm font-medium transition-colors",
+                      "hover:text-primary text-primary/80 text-sm font-medium transition-colors",
                       "block px-4 py-2",
                     )}
                   >
                     How It Works
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem className="nav-item">
-                  <NavigationMenuLink
-                    href="#for-developers"
-                    className={cn(
-                      "hover:text-primary text-sm font-medium transition-colors",
-                      "block px-4 py-2",
-                    )}
-                  >
-                    For Developers
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -80,7 +69,6 @@ export function RootLayout() {
         </div>
       </header>
 
-      {/* Outlet pour le contenu des routes */}
       <main className="flex-1">
         <Outlet />
       </main>

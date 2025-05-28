@@ -67,7 +67,7 @@ export default function Home() {
 
       {/* Text Animations Section */}
       <section
-        id="text-animations"
+        id="components"
         className="bg-[#0d0d10] px-4 py-16 sm:px-6 lg:px-8"
       >
         <div className="container mx-auto max-w-6xl">

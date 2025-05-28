@@ -198,7 +198,7 @@ export function SplitTransitionAutoDemo() {
   );
 
   return (
-    <div className="relative h-[150px] w-full overflow-hidden rounded-lg border">
+    <div className="border-border relative h-[200px] w-full overflow-hidden rounded-lg border">
       <SplitPageTransition
         frontPage={overlayContent}
         backPage={content}

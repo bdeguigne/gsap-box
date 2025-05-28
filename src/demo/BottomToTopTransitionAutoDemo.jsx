@@ -38,8 +38,8 @@ export function BottomToTopTransitionAutoDemo() {
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden rounded-lg border bg-black"
-      style={{ height: "150px" }}
+      className="border-border relative h-full w-full overflow-hidden rounded-lg border bg-black"
+      style={{ height: "200px" }}
     >
       <BottomToTopTransition pages={pages} activePage={currentPage} />
     </div>
