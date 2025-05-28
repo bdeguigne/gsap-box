@@ -4,9 +4,10 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { CodeBlock } from "../components/ui/code-block";
 import { TextReveal } from "../components/gsap-components/TextReveal";
-import { FadeInScroll } from "../components/gsap-components/fade-in-scroll";
+import { FadeInScroll } from "../components/gsap-components/FadeInScroll";
 import { RollingText } from "../components/gsap-components/RollingText";
-import PageTransitionDemo from "../components/gsap-components/PageTransition";
+import BottomToTopTransitionDemo from "../demo/BottomToTopTransitionDemo";
+import SplitTransitionDemo from "../demo/SplitTransitionDemo";
 
 /**
  * Page de détail d'un composant GSAP
@@ -120,8 +121,18 @@ export default function ComponentPreview() {
         );
       case "fade-in-scroll":
         return <div className="text-xl">Fade In Content</div>;
-      case "page-transition":
-        return <PageTransitionDemo />;
+      case "bottom-to-top-transition":
+        return (
+          <div className="h-full w-full">
+            <BottomToTopTransitionDemo />
+          </div>
+        );
+      case "split-page-transition":
+        return (
+          <div className="h-full w-full">
+            <SplitTransitionDemo />
+          </div>
+        );
       default:
         return <div className="text-secondary">Aperçu non disponible</div>;
     }
@@ -176,7 +187,7 @@ export default function ComponentPreview() {
       {/* Contenu */}
       <div className="border-border bg-card rounded-lg border p-6">
         {activeTab === "preview" ? (
-          <div className="flex min-h-[300px] items-center justify-center">
+          <div className="flex h-full min-h-[300px] w-full items-center justify-center">
             {getComponentPreview()}
           </div>
         ) : (

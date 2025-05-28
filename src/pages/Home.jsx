@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { ComponentCard } from "../components/ComponentCard";
 import { TextReveal } from "../components/gsap-components/TextReveal";
-import { FadeInScroll } from "../components/gsap-components/fade-in-scroll";
-import { StaggeredGrid } from "../components/gsap-components/staggered-grid";
+import { FadeInScroll } from "../components/gsap-components/FadeInScroll";
+import { StaggeredGrid } from "../components/ui/staggered-grid";
 import { RollingText } from "../components/gsap-components/RollingText";
+import BottomToTopTransitionAutoDemo from "../demo/BottomToTopTransitionAutoDemo";
+import SplitTransitionAutoDemo from "../demo/SplitTransitionAutoDemo";
 import { Button } from "../components/ui/button";
 
 // Exemples de code pour les composants
@@ -74,7 +76,7 @@ export default function Home() {
               Text Animations
             </h2>
             <p className="text-secondary mb-6 text-sm">
-              Nice, simple, and reusable GSAP animations.
+              Nice, simple, and reusable text animations.
             </p>
           </FadeInScroll>
 
@@ -149,24 +151,47 @@ export default function Home() {
                 )
               }
             />
+          </StaggeredGrid>
+        </div>
+      </section>
 
+      <section
+        id="page-transition"
+        className="bg-[#0d0d10] px-4 py-16 sm:px-6 lg:px-8"
+      >
+        <div className="container mx-auto max-w-6xl">
+          <FadeInScroll>
+            <h2 className="mb-1 text-2xl font-medium tracking-tight">
+              Page Transitions
+            </h2>
+            <p className="text-secondary mb-6 text-sm">
+              Smooth page transitions.
+            </p>
+          </FadeInScroll>
+          <StaggeredGrid className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ComponentCard
-              title="Page Transition"
-              preview={
-                <div className="flex h-[100px] items-center justify-center">
-                  <div className="bg-accent rounded-md px-4 py-2 text-sm font-medium text-white">
-                    Bottom-to-Top Transition
-                  </div>
-                </div>
-              }
+              title="Bottom-to-Top Transition"
+              preview={<BottomToTopTransitionAutoDemo />}
               onClick={() =>
-                navigateToComponent("page-transition", "Page Transition")
+                navigateToComponent(
+                  "bottom-to-top-transition",
+                  "Bottom-to-Top Transition",
+                )
+              }
+            />
+            <ComponentCard
+              title="Split Page Transition"
+              preview={<SplitTransitionAutoDemo />}
+              onClick={() =>
+                navigateToComponent(
+                  "split-page-transition",
+                  "Split Page Transition",
+                )
               }
             />
           </StaggeredGrid>
         </div>
       </section>
-
       {/* How It Works Section */}
       <section id="how-it-works" className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-4xl">

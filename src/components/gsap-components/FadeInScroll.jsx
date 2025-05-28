@@ -19,30 +19,33 @@ export function FadeInScroll({
 }) {
   const elementRef = useRef(null);
 
-  useGSAP(() => {
-    if (!elementRef.current) return;
+  useGSAP(
+    () => {
+      if (!elementRef.current) return;
 
-    gsap.fromTo(
-      elementRef.current,
-      {
-        y: y,
-        opacity: opacity,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: duration,
-        delay: delay,
-        ease: ease,
-        scrollTrigger: {
-          trigger: elementRef.current,
-          start: "top 90%",
-          end: "bottom 70%",
-          once: true,
+      gsap.fromTo(
+        elementRef.current,
+        {
+          y: y,
+          opacity: opacity,
         },
-      },
-    );
-  }, []);
+        {
+          y: 0,
+          opacity: 1,
+          duration: duration,
+          delay: delay,
+          ease: ease,
+          scrollTrigger: {
+            trigger: elementRef.current,
+            start: "top 90%",
+            end: "bottom 70%",
+            once: true,
+          },
+        },
+      );
+    },
+    { scope: elementRef },
+  );
 
   return (
     <div ref={elementRef} className={cn("opacity-0", className)} {...props}>

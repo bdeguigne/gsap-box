@@ -13,7 +13,7 @@ export function ComponentCard({ title, preview, onClick, className }) {
         )}
       >
         <CardContent className="border-border p-0" onClick={onClick}>
-          <div className="bg-card hover:bg-muted p-6 transition-colors">
+          <div className="bg-card hover:bg-muted/80 p-6 transition-colors">
             <div className="relative flex min-h-[200px] items-center justify-center">
               {preview}
               <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
