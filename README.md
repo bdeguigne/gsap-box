@@ -1,7 +1,7 @@
 # GSAP-Box
 
 <div align="center">
-  <img src="public/logo.svg" alt="GSAP-Box Logo" width="120" />
+  <img src="https://github.com/bdeguigne/gsap-box/blob/main/public/logo.png?raw=true" alt="GSAP-Box Logo" width="120" />
   <h3>A collection of reusable GSAP animations for React</h3>
 </div>
 
