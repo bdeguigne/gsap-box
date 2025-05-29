@@ -125,23 +125,30 @@ export default function ComponentPreview() {
         return (
           <div className="w-full max-w-xl">
             <FadeInScroll>
-              <div className="mb-4 rounded-lg bg-card p-6 shadow-md">
+              <div className="bg-card mb-4 rounded-lg p-6 shadow-md">
                 <h3 className="mb-2 text-xl font-bold">Reveal on Scroll</h3>
-                <p className="text-secondary">Elements gracefully appear as you scroll down the page.</p>
+                <p className="text-secondary">
+                  Elements gracefully appear as you scroll down the page.
+                </p>
               </div>
             </FadeInScroll>
-            
+
             <FadeInScroll delay={0.2}>
-              <div className="mb-4 rounded-lg bg-card p-6 shadow-md">
+              <div className="bg-card mb-4 rounded-lg p-6 shadow-md">
                 <h3 className="mb-2 text-xl font-bold">Sequential Animation</h3>
-                <p className="text-secondary">Content appears in sequence with customizable timing.</p>
+                <p className="text-secondary">
+                  Content appears in sequence with customizable timing.
+                </p>
               </div>
             </FadeInScroll>
-            
+
             <FadeInScroll delay={0.4}>
-              <div className="mb-4 rounded-lg bg-card p-6 shadow-md">
+              <div className="bg-card mb-4 rounded-lg p-6 shadow-md">
                 <h3 className="mb-2 text-xl font-bold">Subtle Motion</h3>
-                <p className="text-secondary">Elegant animations that enhance rather than distract from your content.</p>
+                <p className="text-secondary">
+                  Elegant animations that enhance rather than distract from your
+                  content.
+                </p>
               </div>
             </FadeInScroll>
           </div>
@@ -208,9 +215,9 @@ export default function ComponentPreview() {
         <Button
           variant="link"
           className="p-0 text-sm"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/components")}
         >
-          Home
+          Components
         </Button>
         <span>/</span>
         <span className="text-primary font-medium">

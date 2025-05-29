@@ -60,21 +60,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border-border relative h-[300px] w-full max-w-md rounded-lg border bg-black/10 shadow-lg backdrop-blur-sm md:h-[350px]">
-            <div className="absolute inset-0 flex items-center justify-center p-6">
-              <div className="text-center md:text-left">
-                <h3 className="mb-4 text-xl font-medium">Animation brings</h3>
-                <div className="text-2xl font-[200] whitespace-nowrap">
-                  <span className="inline-block">
-                    <RollingText
-                      innerClass="text-3xl font-bold text-accent inline-block"
-                      words={["life.", "motion.", "energy.", "magic."]}
-                      letterHeight={25}
-                    />
-                  </span>
-                </div>
-              </div>
-            </div>
+          <div className="border-border relative h-[350px] w-full max-w-lg rounded-lg border bg-black/10 shadow-lg backdrop-blur-sm overflow-hidden md:h-[400px] lg:max-w-xl">
+            <video 
+              className="absolute inset-0 w-full h-full object-cover" 
+              style={{ transform: 'scale(1.05)' }} /* Légèrement agrandir la vidéo pour masquer les bordures de la vidéo */
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+            >
+              <source src="/assets/gsap-box-demo.mp4" type="video/mp4" />
+              Votre navigateur ne prend pas en charge la vidéo HTML5.
+            </video>
           </div>
         </div>
       </section>

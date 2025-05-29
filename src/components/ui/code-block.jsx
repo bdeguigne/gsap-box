@@ -1,6 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Check, Copy, Download } from "lucide-react";
 import { cn } from "../../lib/utils";
+import Prism from "prismjs";
+
+// Importer les langages que vous souhaitez prendre en charge
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-css";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-tsx";
+
+// Importer un thème Prism (vous pouvez choisir parmi plusieurs thèmes)
+import "prismjs/themes/prism-tomorrow.css";
 
 /**
  * Composant CodeBlock amélioré pour afficher du code avec des options de copie et téléchargement
@@ -18,6 +30,14 @@ export function CodeBlock({
   filename = "component.jsx" 
 }) {
   const [copied, setCopied] = useState(false);
+  const codeRef = useRef(null);
+  
+  // Appliquer la coloration syntaxique lorsque le code ou le langage change
+  useEffect(() => {
+    if (codeRef.current) {
+      Prism.highlightElement(codeRef.current);
+    }
+  }, [code, language]);
 
   const copyToClipboard = async () => {
     try {
@@ -72,7 +92,9 @@ export function CodeBlock({
         </div>
       </div>
       <pre className="p-4 overflow-x-auto text-sm">
-        <code className="text-primary">{code}</code>
+        <code ref={codeRef} className={`language-${language}`}>
+          {code}
+        </code>
       </pre>
     </div>
   );

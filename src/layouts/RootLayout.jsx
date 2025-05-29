@@ -39,32 +39,6 @@ export function RootLayout() {
                 <span>GSAP-BOX</span>
               </a>
             </div>
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem className="nav-item">
-                  <NavigationMenuLink
-                    href="#components"
-                    className={cn(
-                      "hover:text-primary text-primary/80 text-sm font-medium transition-colors",
-                      "block px-4 py-2",
-                    )}
-                  >
-                    Components
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem className="nav-item">
-                  <NavigationMenuLink
-                    href="#how-it-works"
-                    className={cn(
-                      "hover:text-primary text-primary/80 text-sm font-medium transition-colors",
-                      "block px-4 py-2",
-                    )}
-                  >
-                    How It Works
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
           </div>
         </div>
       </header>
