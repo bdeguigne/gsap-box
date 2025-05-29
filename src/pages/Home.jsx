@@ -5,24 +5,6 @@ import { RollingText } from "../components/gsap-components/RollingText";
 import { Button } from "../components/ui/button";
 import { ArrowRight, Github, Code, Wand2, Zap } from "lucide-react";
 
-// Exemples de code pour les composants
-const textRevealCode = `import { TextReveal } from "./components/gsap-components/TextReveal";
-
-<TextReveal>
-  <p>This is a text reveal animation</p>
-  <p>It will animate character by character</p>
-</TextReveal>`;
-
-const fadeInScrollCode = `import { FadeInScroll } from "./components/gsap-components/fade-in-scroll";
-
-<FadeInScroll>
-  <div>This content will fade in on scroll</div>
-</FadeInScroll>`;
-
-const rollingTextCode = `import { RollingText } from "./components/gsap-components/RollingText";
-
-<RollingText words={["ROLLING", "TEXT", "ANIMATION"]} />`;
-
 export default function Home() {
   const navigate = useNavigate();
 
@@ -53,24 +35,31 @@ export default function Home() {
                 Explore Components
                 <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="gap-2">
-                <Github className="h-4 w-4" />
-                GitHub
+              <Button size="lg" variant="outline" className="gap-2" asChild>
+                <a
+                  href="https://github.com/bdeguigne/gsap-box"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View source code on GitHub"
+                >
+                  <Github className="h-4 w-4" />
+                  GitHub
+                </a>
               </Button>
             </div>
           </div>
 
-          <div className="border-border relative h-[350px] w-full max-w-lg rounded-lg border bg-black/10 shadow-lg backdrop-blur-sm overflow-hidden md:h-[400px] lg:max-w-xl">
-            <video 
-              className="absolute inset-0 w-full h-full object-cover" 
-              style={{ transform: 'scale(1.05)' }} /* Légèrement agrandir la vidéo pour masquer les bordures de la vidéo */
-              autoPlay 
-              loop 
-              muted 
+          <div className="border-border relative h-[350px] w-full max-w-lg overflow-hidden rounded-lg border bg-black/10 shadow-lg backdrop-blur-sm md:h-[400px] lg:max-w-xl">
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ transform: "scale(1.05)" }}
+              autoPlay
+              loop
+              muted
               playsInline
             >
               <source src="/assets/gsap-box-demo.mp4" type="video/mp4" />
-              Votre navigateur ne prend pas en charge la vidéo HTML5.
+              Your browser does not support the video tag.
             </video>
           </div>
         </div>
@@ -150,25 +139,6 @@ export default function Home() {
           </FadeInScroll>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="px-4 py-8">
-        <div className="container mx-auto max-w-5xl">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-secondary text-sm">
-              © 2025 GSAP-Box. All rights reserved.
-            </p>
-            <div className="flex gap-4">
-              <a href="#" className="text-secondary hover:text-accent text-sm">
-                GitHub
-              </a>
-              <a href="#" className="text-secondary hover:text-accent text-sm">
-                Twitter
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

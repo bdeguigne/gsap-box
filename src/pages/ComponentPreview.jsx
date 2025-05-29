@@ -24,7 +24,7 @@ export default function ComponentPreview() {
   const [demoCode, setDemoCode] = useState("");
   const [componentCode, setComponentCode] = useState("");
 
-  // Fonction pour générer l'aperçu du composant en fonction de son ID
+  // Function to generate the component preview based on its ID
   const getComponentPreview = () => {
     switch (componentId) {
       case "text-reveal":
@@ -71,7 +71,7 @@ export default function ComponentPreview() {
       case "rolling-text":
         return (
           <div className="flex flex-col items-center">
-            {/* Affichage de la démo sélectionnée */}
+            {/* Display of the selected demo */}
             <div className="flex min-h-[150px] w-full items-center justify-center">
               {rollingTextDemo === "counter" ? (
                 <div className="flex items-center justify-center">
@@ -166,42 +166,42 @@ export default function ComponentPreview() {
           </div>
         );
       default:
-        return <div className="text-secondary">Aperçu non disponible</div>;
+        return <div className="text-secondary">Preview not available</div>;
     }
   };
 
-  // Charger le code source des composants et démos depuis le fichier de données
+  // Load component and demo source code from the data file
   useEffect(() => {
     const loadComponentCode = () => {
       try {
-        // Vérifier si le composant existe dans notre base de données de code source
+        // Check if the component exists in our source code database
         if (sourceCode[componentId]) {
-          // Récupérer le code de la démo
+          // Get the demo code
           if (sourceCode[componentId].demo) {
             setDemoCode(sourceCode[componentId].demo);
           } else {
-            setDemoCode(`// Code de démo non disponible pour ${componentId}`);
+            setDemoCode(`// Demo code not available for ${componentId}`);
           }
 
-          // Récupérer le code du composant
+          // Get the component code
           if (sourceCode[componentId].component) {
             setComponentCode(sourceCode[componentId].component);
           } else {
             setComponentCode(
-              `// Code du composant non disponible pour ${componentId}`,
+              `// Component code not available for ${componentId}`,
             );
           }
         } else {
-          // Composant non trouvé dans la base de données
-          setDemoCode(`// Code de démo non disponible pour ${componentId}`);
+          // Component not found in the database
+          setDemoCode(`// Demo code not available for ${componentId}`);
           setComponentCode(
-            `// Code du composant non disponible pour ${componentId}`,
+            `// Component code not available for ${componentId}`,
           );
         }
       } catch (error) {
-        console.error("Erreur lors du chargement du code source:", error);
-        setDemoCode(`// Erreur: ${error.message}`);
-        setComponentCode(`// Erreur: ${error.message}`);
+        console.error("Error loading source code:", error);
+        setDemoCode(`// Error: ${error.message}`);
+        setComponentCode(`// Error: ${error.message}`);
       }
     };
 
@@ -225,12 +225,12 @@ export default function ComponentPreview() {
         </span>
       </nav>
 
-      {/* Titre */}
+      {/* Title */}
       <h1 className="mb-8 text-3xl font-bold">
         {componentData.title || componentId}
       </h1>
 
-      {/* Onglets principaux */}
+      {/* Main tabs */}
       <div className="border-border mb-6 flex border-b">
         <button
           className={`px-4 py-2 font-medium transition-colors ${
@@ -254,7 +254,7 @@ export default function ComponentPreview() {
         </button>
       </div>
 
-      {/* Contenu */}
+      {/* Content */}
       <div className="border-border bg-card rounded-lg border p-6">
         {activeTab === "preview" ? (
           <div className="flex h-full min-h-[300px] w-full items-center justify-center">
@@ -262,7 +262,7 @@ export default function ComponentPreview() {
           </div>
         ) : (
           <div>
-            {/* Sous-onglets pour le code */}
+            {/* Code sub-tabs */}
             <div className="mb-4 flex gap-2">
               <button
                 className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
@@ -286,7 +286,7 @@ export default function ComponentPreview() {
               </button>
             </div>
 
-            {/* Affichage du code */}
+            {/* Code display */}
             {codeTab === "demo" ? (
               demoCode ? (
                 <CodeBlock
