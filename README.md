@@ -1,14 +1,36 @@
-# React + Vite
+# GSAP-Box
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
+  <img src="public/logo.svg" alt="GSAP-Box Logo" width="120" />
+  <h3>A collection of reusable GSAP animations for React</h3>
+</div>
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+GSAP-Box is a library of ready-to-use animation components built with GSAP and React. It provides elegant, performant animations that can be easily integrated into any React project.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# refantazio-cards
-# gsap-box
+- **Plug-and-Play Components**: Drop-in animation components with minimal configuration
+- **Customizable**: Extensive props for fine-tuning animations
+- **Responsive**: Works seamlessly across devices and screen sizes
+- **Lightweight**: Modular architecture to keep your bundle size small
+- **Developer-Friendly**: Comprehensive documentation with live examples
+
+## Components
+
+### Text Animations
+
+- **TextReveal**: Reveals text with customizable split animations (lines, words, or letters)
+- **RollingText**: Creates a vertically scrolling text effect with smooth transitions
+
+### Scroll Animations
+
+- **FadeInScroll**: Fades in elements as they enter the viewport
+
+### Page Transitions
+
+- **BottomToTopTransition**: Smooth bottom-to-top page transition
+- **SplitPageTransition**: Divides the page in two parts with a distinctive visual effect
+
+Built by Brice D.
